@@ -4,7 +4,6 @@ public class Kamikaze implements IEstrategiaAtaque{
 
 	@Override
 	public void onScannedRobot(LaboRobot robot) {
-		//Hola uwu
 		robot.turnTo(robot.scannedAngle);
 		robot.turnGunTo(robot.scannedAngle);
 		robot.ahead(robot.scannedDistance);
