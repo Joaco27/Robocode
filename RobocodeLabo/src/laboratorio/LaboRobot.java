@@ -5,7 +5,7 @@ import robocode.*;
 public class LaboRobot extends JuniorRobot
 {
 	
-	private IEstrategiaMovimiento movimiento = new Snake();
+	private EstrategiaMovimiento movimiento = new Snake();
 	private IEstrategiaAtaque ataque = new Kamikaze();
 
 	@Override	

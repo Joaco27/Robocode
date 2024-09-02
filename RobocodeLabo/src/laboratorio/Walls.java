@@ -1,19 +1,16 @@
 package laboratorio;
 
-public class Walls implements IEstrategiaMovimiento{
+public class Walls extends EstrategiaMovimiento{
 
 	@Override
 	public void run(LaboRobot robot) {
 		int pixels = robot.fieldWidth + robot.fieldHeight;
-		robot.ahead(pixels);
+		while (true) {
+			robot.ahead(pixels);
+		}
 		
 	}
 
-	@Override
-	public void onHitWall(LaboRobot robot) {
-		robot.turnRight(90);
-		
-	}
 
 	
 	
