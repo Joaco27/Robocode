@@ -7,6 +7,7 @@ public class Circles extends EstrategiaMovimiento{
 	public void run(LaboRobot robot) {
 		int pixels = ((robot.fieldWidth + robot.fieldHeight)/2)/7;
 		while (true) {
+			robot.turnGunRight(360);
 			if (flag) {
 				robot.turnAheadRight(pixels, 360);
 			} else {

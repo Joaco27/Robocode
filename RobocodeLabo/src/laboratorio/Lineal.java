@@ -1,6 +1,6 @@
 package laboratorio;
 
-public class Walls extends EstrategiaMovimiento{
+public class Lineal extends EstrategiaMovimiento{
 
 	@Override
 	public void run(LaboRobot robot) {

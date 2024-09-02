@@ -9,6 +9,5 @@ public abstract class EstrategiaAtaque {
 		robot.ahead(100);
 		robot.turnGunTo(robot.scannedAngle);
 		
-		
 	}
 }

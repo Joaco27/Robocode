@@ -1,11 +1,14 @@
 package laboratorio;
 
-import static robocode.util.Utils.normalRelativeAngleDegrees;
-
 public class Conservador extends EstrategiaAtaque {
     public void onScannedRobot(LaboRobot robot){
         robot.turnGunTo(robot.scannedAngle); 
-        robot.fire(2);
+        if(robot.energy >= 50){
+            robot.fire(3);
+        }else{
+            robot.fire(1);
+        }
+        
     }
 
 }
