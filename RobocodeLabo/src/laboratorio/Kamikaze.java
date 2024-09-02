@@ -2,7 +2,7 @@ package laboratorio;
 
 import static robocode.util.Utils.normalRelativeAngleDegrees;
 
-public class Kamikaze implements IEstrategiaAtaque{
+public class Kamikaze extends EstrategiaAtaque{
 
 	@Override
 	public void onScannedRobot(LaboRobot robot) {
@@ -15,18 +15,4 @@ public class Kamikaze implements IEstrategiaAtaque{
 		robot.fire(3);
 		
 	}
-
-	@Override
-	public void onHitByBullet(LaboRobot robot) {
-		//Formula usada por otros robots
-		int giro = (int) normalRelativeAngleDegrees(robot.scannedBearing + robot.heading - robot.gunHeading);
-		robot.turnGunTo(giro);
-		robot.fire(3);
-		/*
-		 * for(int i=30; i<360; i+=30) { robot.turnTo(i); robot.turnGunTo(i);
-		 * robot.fire(1); }
-		 */
-		
-	}
-
 }
