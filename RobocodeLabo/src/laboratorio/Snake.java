@@ -14,7 +14,7 @@ public class Snake implements IEstrategiaMovimiento{
 	public void onHitWall(LaboRobot robot) {
 		int giro = (robot.hitWallAngle + 180) % 360;
 		if (giro<0) giro+=360;
-		robot.turnRight(giro);
+		robot.turnTo(giro);
 		robot.ahead(30);
 	}
 
