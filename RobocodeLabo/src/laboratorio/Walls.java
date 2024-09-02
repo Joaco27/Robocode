@@ -6,6 +6,7 @@ public class Walls extends EstrategiaMovimiento{
 	public void run(LaboRobot robot) {
 		int pixels = robot.fieldWidth + robot.fieldHeight;
 		while (true) {
+			robot.turnGunRight(360);
 			robot.ahead(pixels);
 		}
 		
