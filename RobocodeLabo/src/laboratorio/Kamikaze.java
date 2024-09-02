@@ -18,6 +18,7 @@ public class Kamikaze implements IEstrategiaAtaque{
 
 	@Override
 	public void onHitByBullet(LaboRobot robot) {
+		//Formula usada por otros robots
 		int giro = (int) normalRelativeAngleDegrees(robot.scannedBearing + robot.heading - robot.gunHeading);
 		robot.turnGunTo(giro);
 		robot.fire(3);
