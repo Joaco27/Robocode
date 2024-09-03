@@ -2,7 +2,7 @@ package laboratorio;
 import robocode.*;
 
 
-public class LinealConservador extends JuniorRobot
+public class LaboRobot extends JuniorRobot
 {
 	
 	private EstrategiaMovimiento movimiento = new Lineal();
