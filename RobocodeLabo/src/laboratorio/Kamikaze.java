@@ -4,7 +4,7 @@ package laboratorio;
 public class Kamikaze extends EstrategiaAtaque{
 
 	@Override
-	public void onScannedRobot(LaboRobot robot) {
+	public void onScannedRobot(MCJ robot) {
 		robot.turnTo(robot.scannedAngle);
 		robot.turnGunTo(robot.scannedAngle);
 		for(int i=0; i<robot.scannedDistance; i++){

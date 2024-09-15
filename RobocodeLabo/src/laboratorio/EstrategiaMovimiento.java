@@ -2,9 +2,9 @@ package laboratorio;
 
 public abstract class EstrategiaMovimiento {
 	
-	public abstract void run(LaboRobot robot);
+	public abstract void run(MCJ robot);
 	
-	public void onHitWall(LaboRobot robot) {
+	public void onHitWall(MCJ robot) {
 		robot.turnGunTo(robot.scannedAngle);
 		int giro = 180;
 		robot.turnRight(giro);
