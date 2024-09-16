@@ -3,12 +3,11 @@ public class Estratega {
     private Estrategia estrategiaActual;
 
     public Estratega() {
-        this.estrategiaActual = EstrategiaDefensiva.obtenerInstancia();  // Estrategia por defecto
+        this.estrategiaActual = EstrategiaDefensiva.obtenerInstancia();  
     }
 
-    // Método para evaluar y decidir la estrategia
     public Estrategia evaluarYDecidir(MCJ robot) {
-        if (robot.energy < 30 && robot.others > 2) {
+        if (robot.energy < 30) {
             return EstrategiaEvasiva.obtenerInstancia();
         } else if (robot.energy > 50) {
             return EstrategiaAgresiva.obtenerInstancia();
@@ -22,7 +21,6 @@ public class Estratega {
     //     this.estrategiaActual = nuevaEstrategia;
     // }
 
-    // Estrategia Defensiva como Singleton
     private static class EstrategiaDefensiva implements Estrategia {
         private static EstrategiaDefensiva instancia;
 
@@ -61,7 +59,6 @@ public class Estratega {
         }
     }
 
-    // Estrategia Agresiva como Singleton
     private static class EstrategiaAgresiva implements Estrategia {
         private static EstrategiaAgresiva instancia;
 
@@ -76,21 +73,28 @@ public class Estratega {
 
         @Override
         public void onScannedRobot(MCJ robot) {
-            robot.turnBackRight(50, 90);
+            robot.turnTo(robot.scannedAngle);
+            robot.ahead(robot.scannedDistance - 50);
+            robot.turnGunTo(robot.scannedAngle);
+            robot.fire(2);
+            robot.turnGunRight(360);
         }
 
         @Override
         public void run(MCJ robot) {
             while (true) {
-                robot.turnGunRight(90);
-                robot.back(30);
+                robot.turnBackRight(50, 90);
+                robot.turnGunRight(360);
             }
         }
 
         @Override
         public void onHitByBullet(MCJ robot) {
-            // Move ahead 100 and in the same time turn left papendicular to the bullet
-		    robot.turnAheadLeft(100, 90 - robot.hitByBulletBearing);
+            robot.turnTo(robot.hitByBulletAngle);
+            robot.ahead(robot.scannedDistance - 50);
+            robot.turnGunTo(robot.scannedAngle);
+            robot.fire(2);
+            robot.turnGunRight(360);
         }
 
         @Override
@@ -100,7 +104,6 @@ public class Estratega {
         }
     }
 
-    // Estrategia Evasiva como Singleton
     private static class EstrategiaEvasiva implements Estrategia {
         private static EstrategiaEvasiva instancia;
 
@@ -130,6 +133,10 @@ public class Estratega {
         public void onHitByBullet(MCJ robot) {
             // Move ahead 100 and in the same time turn left papendicular to the bullet
 		    robot.turnAheadLeft(100, 90 - robot.hitByBulletBearing);
+            while (true) {
+                robot.turnGunRight(90);
+                robot.back(30);
+            }
         }
 
         @Override

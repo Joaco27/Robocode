@@ -1,0 +1,14 @@
+Integrantes:
+	- Rubiano, Manuel; legajo 17711/6
+	- Tartaruga, Joaquín; legajo 17023/7
+	- Zuppa Moro, Catalina; legajo 19446/6
+	
+Descripción del proyecto:
+	Dentro del paquete laboratorio del directorio src, podrán encontrarse las siguientes clases:
+		- EstrategiaAtaque (abstracta): clase abstracta que contiene comportamiento común a las estrategias de ataque
+		- Conservador, Kamikaze: clases concretas que heredan de EstrategiaAtaque e implementan comportamiento específico a cada estrategia de ataque
+		- EstrategiaMovimiento (abstracta): clase abstracta que contiene comportamiento común a las estrategias de movimiento
+		- Circles, Lineal, Snake, Zigzag: clases concretas que heredan de EstrategiaMovimiento e implementan comportamiento específico a cada estrategia de movimiento
+		- LaboRobot: implementación de un robot que cuenta con variables de instancias para indicar sus estrategias de ataque y movimiento. La combinación por defecto es movimiento lineal con ataque conservador.
+
+	En caso de querer cambiar la combinación de estrategias, se puede modificar la instanciación de las variables de estrategias dentro del archivo /src/laboratorio/LaboRobot.java
