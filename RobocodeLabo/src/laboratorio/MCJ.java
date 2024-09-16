@@ -11,6 +11,7 @@ public class MCJ extends JuniorRobot {
     @Override
     public void run() {
         while (true) {
+            System.out.println("Hola");
             estratega.evaluarYDecidir(this).run(this);
         }
     }

@@ -6,14 +6,18 @@ public class Estratega {
         this.estrategiaActual = EstrategiaDefensiva.obtenerInstancia();  
     }
 
-    public Estrategia evaluarYDecidir(MCJ robot) {
-        if (robot.energy < 30) {
-            return EstrategiaEvasiva.obtenerInstancia();
-        } else if (robot.energy > 50) {
-            return EstrategiaAgresiva.obtenerInstancia();
-        } else {
-            return EstrategiaDefensiva.obtenerInstancia();
-        }
+    // public Estrategia evaluarYDecidir(MCJ robot) {
+    //     if (robot.energy < 30) {
+    //         return EstrategiaEvasiva.obtenerInstancia();
+    //     } else if (robot.energy > 50) {
+    //         return EstrategiaAgresiva.obtenerInstancia();
+    //     } else {
+    //         return EstrategiaDefensiva.obtenerInstancia();
+    //     }
+    // }
+
+    public Estrategia evaluarYDecidir(MCJ robot){
+        return EstrategiaDefensiva.obtenerInstancia();
     }
 
     // Cambiar la estrategia
@@ -35,26 +39,28 @@ public class Estratega {
 
         @Override
         public void onScannedRobot(MCJ robot) {
-            robot.turnBackRight(50, 90);
+            robot.fire(2);
+            robot.turnLeft(90);
         }
 
         @Override
         public void run(MCJ robot) {
             while (true) {
-                robot.turnGunRight(90);
-                robot.back(30);
+                robot.ahead(100); 
+                robot.back(100);
+                robot.turnGunTo(robot.hitByBulletBearing);
             }
         }
 
         @Override
         public void onHitByBullet(MCJ robot) {
-            // Move ahead 100 and in the same time turn left papendicular to the bullet
-		    robot.turnAheadLeft(100, 90 - robot.hitByBulletBearing);
+            robot.turnGunTo(robot.hitByBulletBearing);
         }
 
         @Override
         public void onHitWall(MCJ robot) {
-            robot.turnRight(180);
+            robot.turnGunTo(robot.hitByBulletBearing);
+            robot.turnRight(45);
             robot.ahead(50);
         }
     }

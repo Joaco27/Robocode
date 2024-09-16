@@ -1,9 +1,8 @@
 package laboratorio;
-
 public interface Estrategia {
-    void onScannedRobot(MCJ robot);
-    void run(MCJ robot);
-    void onHitByBullet(MCJ robot);
-    void onHitWall(MCJ robot);
+    public void onScannedRobot(MCJ robot);
+    public void run(MCJ robot);
+    public void onHitByBullet(MCJ robot);
+    public void onHitWall(MCJ robot);
 
 }
