@@ -1,24 +1,21 @@
-package laboratorio;
+package MCJ;
 public class Estratega {
     private Estrategia estrategiaActual;
 
     public Estratega() {
-        this.estrategiaActual = EstrategiaDefensiva.obtenerInstancia();  
+        this.estrategiaActual = EstrategiaAgresiva.obtenerInstancia();  
     }
 
-    // public Estrategia evaluarYDecidir(MCJ robot) {
-    //     if (robot.energy < 30) {
-    //         return EstrategiaEvasiva.obtenerInstancia();
-    //     } else if (robot.energy > 50) {
-    //         return EstrategiaAgresiva.obtenerInstancia();
-    //     } else {
-    //         return EstrategiaDefensiva.obtenerInstancia();
-    //     }
-    // }
-
-    public Estrategia evaluarYDecidir(MCJ robot){
-        return EstrategiaDefensiva.obtenerInstancia();
+    public Estrategia evaluarYDecidir(MCJ robot) {
+        if (robot.energy < 30) {
+            return EstrategiaDefensiva.obtenerInstancia();
+        } else if (robot.energy > 50) {
+            return EstrategiaAgresiva.obtenerInstancia();
+        } else {
+            return EstrategiaEvasiva.obtenerInstancia();
+        }
     }
+
 
     // Cambiar la estrategia
     // private void cambiarEstrategia(Estrategia nuevaEstrategia) {
@@ -39,29 +36,32 @@ public class Estratega {
 
         @Override
         public void onScannedRobot(MCJ robot) {
+        	robot.turnGunTo(robot.scannedAngle);
             robot.fire(2);
-            robot.turnLeft(90);
+            robot.ahead(100);
+            robot.turnGunTo(robot.scannedAngle);
         }
 
         @Override
         public void run(MCJ robot) {
             while (true) {
                 robot.ahead(100); 
+                robot.turnGunRight(360);
                 robot.back(100);
-                robot.turnGunTo(robot.hitByBulletBearing);
+                robot.turnGunRight(360);
             }
         }
 
         @Override
         public void onHitByBullet(MCJ robot) {
-            robot.turnGunTo(robot.hitByBulletBearing);
+            robot.turnTo(robot.hitByBulletBearing - 90);
+            robot.ahead(100);
+            robot.turnGunTo(robot.hitByBulletAngle);
         }
 
         @Override
         public void onHitWall(MCJ robot) {
-            robot.turnGunTo(robot.hitByBulletBearing);
-            robot.turnRight(45);
-            robot.ahead(50);
+            robot.turnBackRight(100, 180);
         }
     }
 
@@ -79,17 +79,16 @@ public class Estratega {
 
         @Override
         public void onScannedRobot(MCJ robot) {
-            robot.turnTo(robot.scannedAngle);
-            robot.ahead(robot.scannedDistance - 50);
             robot.turnGunTo(robot.scannedAngle);
             robot.fire(2);
+            robot.turnTo(robot.scannedAngle);
+            robot.ahead(robot.scannedDistance - 50);
             robot.turnGunRight(360);
         }
 
         @Override
         public void run(MCJ robot) {
             while (true) {
-                robot.turnBackRight(50, 90);
                 robot.turnGunRight(360);
             }
         }
@@ -97,16 +96,12 @@ public class Estratega {
         @Override
         public void onHitByBullet(MCJ robot) {
             robot.turnTo(robot.hitByBulletAngle);
-            robot.ahead(robot.scannedDistance - 50);
-            robot.turnGunTo(robot.scannedAngle);
-            robot.fire(2);
-            robot.turnGunRight(360);
+            robot.turnGunTo(robot.hitByBulletAngle);
         }
 
         @Override
         public void onHitWall(MCJ robot) {
-            robot.turnRight(180);
-            robot.ahead(50);
+            robot.turnBackRight(100, 180);
         }
     }
 
@@ -124,31 +119,30 @@ public class Estratega {
 
         @Override
         public void onScannedRobot(MCJ robot) {
-            robot.turnBackRight(50, 90);
+            robot.turnGunTo(robot.scannedAngle);
+            robot.fire(2);
+            robot.turnGunTo(robot.scannedAngle);        
         }
 
         @Override
         public void run(MCJ robot) {
             while (true) {
-                robot.turnGunRight(90);
-                robot.back(30);
+                robot.turnAheadRight(50, 90);
+                robot.turnGunRight(360);
+                robot.turnAheadLeft(50, 90);
+                robot.turnGunRight(360);
             }
         }
 
         @Override
         public void onHitByBullet(MCJ robot) {
-            // Move ahead 100 and in the same time turn left papendicular to the bullet
-		    robot.turnAheadLeft(100, 90 - robot.hitByBulletBearing);
-            while (true) {
-                robot.turnGunRight(90);
-                robot.back(30);
-            }
+            robot.turnBackRight(75, 90);
+            robot.turnBackLeft(75, 90);
         }
 
         @Override
         public void onHitWall(MCJ robot) {
-            robot.turnRight(180);
-            robot.ahead(50);
+            robot.turnBackRight(100, 180);
         }
     }
 }

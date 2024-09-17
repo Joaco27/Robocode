@@ -1,4 +1,4 @@
-package laboratorio;
+package MCJ;
 public interface Estrategia {
     public void onScannedRobot(MCJ robot);
     public void run(MCJ robot);

@@ -1,4 +1,4 @@
-package laboratorio;
+package MCJ;
 import robocode.*;
 
 public class MCJ extends JuniorRobot {
